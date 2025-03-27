@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <section id="profile" class="profile-section">
+        <h2>Your Profile</h2>
+        <p><strong>Username:</strong> {{users.username}}</p>
+        <p><strong>Email:</strong> {{users.email}}</p>
+        <h3>Previous Predictions</h3>
+        <ul>
+            {% for prediction in users.predictions %}
+            <li>
+                <p><strong>Date:</strong> {{ prediction.date }}</p>
+                <p><strong>Result:</strong> {{ prediction.result }}</p>
+            </li>
+            {% endfor %}
+        </ul>
+    </section>
+</body>
+</html>

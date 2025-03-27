@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Disease Prediction</title>
+    <style>
+        * {
+            border: 0;
+            margin: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background-color: #ff4757;
+            color: white;
+            padding: 38px 0;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .profile {
+            display: none;
+        }
+
+        .active {
+            display: block;
+        }
+
+        section#home {
+            height: 100vh;
+            background: url('data:image/jpeg;base64,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') no-repeat center center/cover;
+        }
+
+        section {
+            padding: 20px;
+            margin: 10px auto;
+            max-width: 900px;
+        }
+
+        section#home .background {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        section#home .overlay {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            color: white;
+        }
+
+        section#home button {
+            background-color: #ff4757;
+            border: none;
+            padding: 10px 20px;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        section#home button:hover {
+            background-color: #ff6b81;
+        }
+
+        h2 {
+            color: #ff4757;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        form label {
+            margin: 5px 0;
+        }
+
+        form input {
+            padding: 8px;
+            margin: 5px 0 15px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        form button {
+            background-color: #ff4757;
+            border: none;
+            padding: 10px 20px;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background-color: #ff6b81;
+        }
+
+        .dos, .donts {
+            margin-top: 20px;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        .profile-section {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .profile-section h2 {
+            color: #333;
+        }
+
+        .profile-section p {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 class="heart">Heart Disease Prediction</h1>
+        <br>
+        <br>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#prediction">Prediction Model</a></li>
+                <li><a href="#dos-donts">Do's and Don'ts</a></li>
+                <li><a href="#profile">Profile</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home">
+        <div class="background">
+            <div class="overlay">
+                <h2>Welcome to Heart Disease Prediction</h2>
+                <p>Get insights and predictions about heart disease based on your health data.</p>
+                <button onclick="location.href='#prediction'">Try the Prediction Model</button>
+            </div>
+        </div>
+    </section>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <section id="about">
+        <h2>About Us</h2>
+        <p>Our website aims to provide insights into the risk of heart disease using a prediction model based on various health metrics. We strive to help individuals understand their heart health better and take preventive measures.</p>
+    </section>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <section id="prediction">
+        <h2>Prediction Model</h2>
+        <p>Enter your health data below to get a prediction:</p>
+        <form action="{{url_for('predict')}}" method="post">
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" placeholder="" required>
+            <br>
+
+            <label for="Sex">Sex:</label>
+            <input type="number" id="sex" name="sex" placeholder="" required>
+            <br>
+
+            <label for="Chest pain">Chest pain:</label>
+            <input type="number" id="Chest pain" name="Chest pain" placeholder="" required>
+            <br>
+
+            <label for="resting blood pressure">Resting blood pressure:</label>
+            <input type="number" id="resting blood pressure" name="resting blood pressure" placeholder="" required>
+            <br>
+
+            <label for="cholesterol">Serum cholesterol in mg/dl:</label>
+            <input type="number" id="cholesterol" name="cholesterol" placeholder="" required>
+            <br>
+
+            <label for="bloodsugar">Fasting blood sugar > 120 mg/dl:</label>
+            <input type="number" id="bloodsugar" name="bloodsugar" placeholder="" required>
+            <br>
+
+            <label for="resting electrocardiographic results (values 0,1,2)">Resting electrocardiographic results (values 0,1,2):</label>
+            <input type="number" id="ecg" name="resting electrocardiographic results (values 0,1,2)" placeholder="" required>
+            <br>
+
+            <label for="maximum heart rate achieved">Maximum heart rate achieved:</label>
+            <input type="number" id="maximum heart rate achieved" name="maximum heart rate achieved" placeholder="" required>
+            <br>
+
+            <label for="exercise induced angina">Exercise induced angina:</label>
+            <input type="number" id="exercise induced angina" name="exercise induced angina" placeholder="" required>
+            <br>
+
+            <label for="oldpeak">ST depression induced by exercise relative to rest:</label>
+            <input type="number" id="oldpeak" name="oldpeak" placeholder="" required>
+            <br>
+
+            <label for="slope">Slope of the peak exercise ST segment:</label>
+            <input type="number" id="slope" name="slope" placeholder="" required>
+            <br>
+
+            <label for="num_vessels">Number of major vessels (0-3) colored by fluoroscopy:</label>
+            <input type="number" id="num_vessels" name="num_vessels" placeholder="" required>
+            <br>
+
+            <label for="thal">Thal (0 = normal; 1 = fixed defect; 2 = reversible defect):</label>
+            <input type="number" id="thal" name="thal" placeholder="" required><br>
+            <br>
+            <br>
+
+            <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+        </form>
+        <br>
+        <br>
+        <b>
+            <font style="color: black;">{{pred}}</font>
+        </b>
+    </section>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <section id="dos-donts">
+        <h2>Heart Disease Do's and Don'ts</h2>
+        <div class="dos">
+            <h3>Do's</h3>
+            <ul>
+                <li>Maintain a healthy diet</li>
+                <li>Exercise regularly</li>
+                <li>Monitor your cholesterol levels</li>
+                <li>Get regular health check-ups</li>
+            </ul>
+        </div>
+        <div class="donts">
+            <h3>Don'ts</h3>
+            <ul>
+                <li>Avoid smoking</li>
+                <li>Limit alcohol intake</li>
+                <li>Avoid excessive stress</li>
+                <li>Don't ignore symptoms of heart disease</li>
+            </ul>
+        </div>
+    </section>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <footer>
+        <p>Gayatri Vidya Parishad</p>
+        <br>
+    </footer>
+</body>
+</html>
