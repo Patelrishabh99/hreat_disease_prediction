@@ -1,0 +1,12 @@
+flask
+numpy
+pandas
+scikit-learn
+matplotlib
+seaborn
+flask-wtf
+wtforms
+flask-cors
+requests
+joblib
+gunicorn
