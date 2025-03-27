@@ -58,31 +58,7 @@ After running the command, open your browser and visit:
 
     http://127.0.0.1:5000/
 
-API Endpoints
 
-Endpoint
-
-Method
-
-Description
-
-/
-
-GET
-
-Homepage
-
-/about
-
-GET
-
-About the project
-
-/predict
-
-POST
-
-Takes user input and returns prediction
 
 /dos-donts
 
