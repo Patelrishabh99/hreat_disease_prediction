@@ -1,4 +1,4 @@
-# hreat_disease_prediction
+# heart_disease_prediction
 Overview
 
 The Heart Disease Prediction Website is a web application that allows users to enter their health data and get a prediction on whether they are at risk of heart disease. The application is built using Flask (Python) for the backend and HTML, CSS, JavaScript for the frontend. It uses a machine learning model to analyze user inputs and provide predictions.
